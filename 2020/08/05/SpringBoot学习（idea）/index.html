@@ -10,16 +10,16 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="SpringBoot简介核心：约定大于配置 Spring是如何简化java开发的为了降低java开发的复杂性，Spring采用了以下4种关键策略  基于pojo的轻量级和最小侵入性编程 通过IOC，依赖注入（DI）和面向接口实现松耦合 基于切面（AOP）和惯例进行声明式编程 通过切面和模板减少样式代码  SpringBootd的主要优点 为所有Spring开发者更快的入门 开箱即用，提供各种默认配">
+  <meta name="description" content="SpringBoot简介核心：约定大于配置">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringBoot学习（idea）">
 <meta property="og:url" content="http://yoursite.com/2020/08/05/SpringBoot%E5%AD%A6%E4%B9%A0%EF%BC%88idea%EF%BC%89/index.html">
 <meta property="og:site_name" content="bestrookie的折腾之路">
-<meta property="og:description" content="SpringBoot简介核心：约定大于配置 Spring是如何简化java开发的为了降低java开发的复杂性，Spring采用了以下4种关键策略  基于pojo的轻量级和最小侵入性编程 通过IOC，依赖注入（DI）和面向接口实现松耦合 基于切面（AOP）和惯例进行声明式编程 通过切面和模板减少样式代码  SpringBootd的主要优点 为所有Spring开发者更快的入门 开箱即用，提供各种默认配">
+<meta property="og:description" content="SpringBoot简介核心：约定大于配置">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200806190652282.png">
 <meta property="article:published_time" content="2020-08-05T14:40:05.000Z">
-<meta property="article:modified_time" content="2020-08-12T14:08:03.028Z">
+<meta property="article:modified_time" content="2020-08-13T06:44:03.282Z">
 <meta property="article:author" content="bestrookie">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="SpringBoot">
@@ -79,9 +79,13 @@
 			
 				<li><a href="/" target="_blank">主页</a></li>
 			
-				<li><a href="/tags/%E9%9A%8F%E7%AC%94/" target="_blank">随笔</a></li>
-			
 				<li><a href="/tags/java/" target="_blank">java</a></li>
+			
+				<li><a href="/tags/Swagger/" target="_blank">Swagger</a></li>
+			
+				<li><a href="/tags/SpringBoot/" target="_blank">SpringBoot</a></li>
+			
+				<li><a href="/tags/Mysql/" target="_blank">Mysql</a></li>
 			
 			</ul>
 		</nav>
@@ -163,6 +167,10 @@
 			
 				
 			
+				
+			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -195,11 +203,15 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
+					<li style="width: 20%"><a href="/">主页</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+					<li style="width: 20%"><a href="/tags/java/">java</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/java/">java</a></li>
+					<li style="width: 20%"><a href="/tags/Swagger/">Swagger</a></li>
+		        
+					<li style="width: 20%"><a href="/tags/SpringBoot/">SpringBoot</a></li>
+		        
+					<li style="width: 20%"><a href="/tags/Mysql/">Mysql</a></li>
 		        
 				</ul>
 			</nav>
@@ -248,7 +260,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">579字</span>
+      <span class="post-count">576字</span>
     </span>
   </span>
 
@@ -269,6 +281,8 @@
   <div class="article-entry" itemprop="articleBody">
     
     <h2 id="SpringBoot简介"><a href="#SpringBoot简介" class="headerlink" title="SpringBoot简介"></a>SpringBoot简介</h2><p><strong>核心：</strong>约定大于配置</p>
+<a id="more"></a>
+
 <h3 id="Spring是如何简化java开发的"><a href="#Spring是如何简化java开发的" class="headerlink" title="Spring是如何简化java开发的"></a>Spring是如何简化java开发的</h3><p>为了降低java开发的复杂性，Spring采用了以下4种关键策略</p>
 <ol>
 <li>基于pojo的轻量级和最小侵入性编程</li>
@@ -288,13 +302,16 @@
 </ul>
 <p><img src="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200806190652282.png" alt="image-20200806190652282"></p>
 <hr>
-<h4 id="启动器"><a href="#启动器" class="headerlink" title="启动器"></a>启动器</h4><ul>
-<li><pre><code class="xml"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span>
-    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>
-    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>
-<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>
-<span class="comment"><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 启动器：就是springboot的启动场景</span><br><span class="line"></span><br><span class="line">- 比如上面这个启动器，他就会帮我们自动岛主web环境所有的依赖</span><br><span class="line"></span><br><span class="line">- springboot会将所有的功能场景都变成一个个的启动器</span><br><span class="line"></span><br><span class="line">- 我们要使用什么功能，就只需要找到对应的启动器就可以了 &#96;&#96;&#96;starter</span><br></pre></td></tr></table></figure></span>
-</code></pre>
+<h4 id="启动器"><a href="#启动器" class="headerlink" title="启动器"></a>启动器</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>启动器：就是springboot的启动场景</p>
+</li>
+<li><p>比如上面这个启动器，他就会帮我们自动岛主web环境所有的依赖</p>
+</li>
+<li><p>springboot会将所有的功能场景都变成一个个的启动器</p>
+</li>
+<li><p>我们要使用什么功能，就只需要找到对应的启动器就可以了 <code>starter</code></p>
 </li>
 </ul>
 <p><strong>小结：</strong>springboot所有的配置都是在启动的时候扫描并加载：spring。factories所有的自动配置类都在这里面，但是不一定生效，要判断条件是否成立，只要导入了对应的start，就有对应的启动器有了启动器，我们自动装配就会生效，然后就配置成功了。</p>

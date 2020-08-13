@@ -75,9 +75,13 @@
 			
 				<li><a href="/" target="_blank">主页</a></li>
 			
-				<li><a href="/tags/%E9%9A%8F%E7%AC%94/" target="_blank">随笔</a></li>
-			
 				<li><a href="/tags/java/" target="_blank">java</a></li>
+			
+				<li><a href="/tags/Swagger/" target="_blank">Swagger</a></li>
+			
+				<li><a href="/tags/SpringBoot/" target="_blank">SpringBoot</a></li>
+			
+				<li><a href="/tags/Mysql/" target="_blank">Mysql</a></li>
 			
 			</ul>
 		</nav>
@@ -159,6 +163,10 @@
 			
 				
 			
+				
+			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -191,11 +199,15 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
+					<li style="width: 20%"><a href="/">主页</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+					<li style="width: 20%"><a href="/tags/java/">java</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/java/">java</a></li>
+					<li style="width: 20%"><a href="/tags/Swagger/">Swagger</a></li>
+		        
+					<li style="width: 20%"><a href="/tags/SpringBoot/">SpringBoot</a></li>
+		        
+					<li style="width: 20%"><a href="/tags/Mysql/">Mysql</a></li>
 		        
 				</ul>
 			</nav>
@@ -251,59 +263,9 @@
   <div class="article-entry" itemprop="articleBody">
     
     <h1 id="SpringBoot集成Swagger（idea）"><a href="#SpringBoot集成Swagger（idea）" class="headerlink" title="SpringBoot集成Swagger（idea）"></a>SpringBoot集成Swagger（idea）</h1><p><strong>本次使用的是Swagger2.9如果使用Seagger3不适用本次学习</strong></p>
-<h2 id="Swagger简介"><a href="#Swagger简介" class="headerlink" title="Swagger简介"></a>Swagger简介</h2><p><strong>产生背景：</strong></p>
-<ul>
-<li>前端 -&gt; 前端控制层、视图层</li>
-<li>后端 -&gt; 后端控制层、服务层、数据访问层</li>
-<li>前后端通过API进行交互</li>
-<li>前后端相对独立且松耦合</li>
-</ul>
-<p><strong>Swagger：</strong></p>
-<ul>
-<li>最流行的API框架</li>
-<li>Restful Api文档在线自动生成器（API文档与API定义同步更新）</li>
-<li>直接可以运行，在线测试API</li>
-<li>支持多种语言</li>
-</ul>
-<h2 id="SpringBoot集成Swagger"><a href="#SpringBoot集成Swagger" class="headerlink" title="SpringBoot集成Swagger"></a>SpringBoot集成Swagger</h2><p><strong>运行要求：</strong>jdk1.8及以上否则无法运行</p>
-<p>步骤：</p>
-<ol>
-<li><p>创建一个SpringBoot项目</p>
-</li>
-<li><p>添加Mavean依赖<img src="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200812223601928.png" alt="image-20200812223601928"></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger-ui<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>先写一个HelloController测试我们集成的Swagger</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.swagger.controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : bestrookie</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloController</span></span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/hello"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hello-word"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>想要使用Swagger，我们需要写一个SwaggerConfig来配置Swagger注意包的位置</p>
-<p><img src="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200812225411644.png" alt=""></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span> <span class="comment">//配置类</span></span><br><span class="line"><span class="meta">@EnableSwagger</span>2<span class="comment">// 开启Swagger2的自动配置</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SwaggerConfig</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>测试是否可以访问Swagger：<a href="http://localhost:8080/swagger-ui.html" target="_blank" rel="noopener">http://localhost:8080/swagger-ui.html</a> ，看到页面说明构建成功</p>
-</li>
-</ol>
-<p><img src="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200812230140858.png" alt="image-20200812230140858"></p>
-<p>（此页面是修改配置后的样子 大体即使这么个样子…）</p>
-<h2 id="配置Swagger"><a href="#配置Swagger" class="headerlink" title="配置Swagger"></a>配置Swagger</h2><ol>
-<li><p>Swagger实例Bean是Docket，所以通过配置Docket实例来配置Swaggger。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Docket <span class="title">docket</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<ol start="2">
-<li><p>可以通过apiInfo()属性配置文档信息</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//配置Swagger信息=apiInfo</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> ApiInfo <span class="title">apiInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//作者信息</span></span><br><span class="line">        Contact contact = <span class="keyword">new</span> Contact(<span class="string">"bestrookie"</span>,<span class="string">"http://bestrookie.cn"</span>,<span class="string">"******"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ApiInfo(</span><br><span class="line">                <span class="string">"SwaggerAPI文档"</span>,</span><br><span class="line">                <span class="string">"一个简单的demo"</span>,</span><br><span class="line">                <span class="string">"v1.0"</span>,</span><br><span class="line">                <span class="string">"http://bestrookie.cn"</span>,</span><br><span class="line">                contact,</span><br><span class="line">                <span class="string">"Apache2.0"</span>,</span><br><span class="line">                <span class="string">"http://www.apache.org/licenses/LICENSE-2.0"</span>,</span><br><span class="line">                <span class="keyword">new</span> ArrayList()</span><br><span class="line">                );</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Docket实例关联上apiInfo()</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Docket <span class="title">docket</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重新访问项目是不是就和我上面那个图差不多了</p>
-</li>
-</ol>
-
+    
+    <a class="article-more-a" href="/2020/08/12/Swagger%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more">more >></a>
+    
     
 
     
@@ -396,48 +358,10 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="Mysql常问问题"><a href="#Mysql常问问题" class="headerlink" title="Mysql常问问题"></a>Mysql常问问题</h1><h2 id="为什么用自增列为主键"><a href="#为什么用自增列为主键" class="headerlink" title="为什么用自增列为主键"></a>为什么用自增列为主键</h2><ol>
-<li>如果我们定义了主键(PRIMARY KEY)，那么InnoDB（mysql的存储引擎）会选择主键作为聚集索引、如果没有显式定义主键，则InnoDB会选择第一个不包含有NULL值的唯一索引作为主键索引、如果也没有这样的唯一索引，则InnoDB会选择内置6字节长的ROWID作为隐含的聚集索引(ROWID随着行记录的写入而主键递增，这个ROWID不像ORACLE的ROWID那样可引用，是隐含的)。</li>
-<li>数据记录本身被存于主索引（一颗B+Tree）的叶子节点上。这就要求同一个叶子节点内（大小为一个内存页或磁盘页）的各条数据记录按主键顺序存放，因此每当有一条新的记录插入时，MySQL会根据其主键将其插入适当的节点和位置，如果页面达到装载因子（InnoDB默认为15/16），则开辟一个新的页（节点）</li>
-<li>如果表使用自增主键，那么每次插入新的记录，记录就会顺序添加到当前索引节点的后续位置，当一页写满，就会自动开辟一个新的页</li>
-<li>如果使用非自增主键（如果身份证号或学号等），由于每次插入主键的值近似于随机，因此每次新纪录都要被插到现有索引页得中间某个位置，此时MySQL不得不为了将新记录插到合适位置而移动数据，甚至目标页面可能已经被回写到磁盘上而从缓存中清掉，此时又要从磁盘上读回来，这增加了很多开销，同时频繁的移动、分页操作造成了大量的碎片，得到了不够紧凑的索引结构，后续不得不通过OPTIMIZE TABLE来重建表并优化填充页面。</li>
-</ol>
-<h2 id="为什么使用数据索引能提高效率"><a href="#为什么使用数据索引能提高效率" class="headerlink" title="为什么使用数据索引能提高效率"></a>为什么使用数据索引能提高效率</h2><ol>
-<li>数据索引的存储是有序的</li>
-<li>在有序的情况下，通过索引查询一个数据是无需遍历索引记录的</li>
-<li>极端情况下，数据索引的查询效率为二分法查询效率，趋近于 log2(N)</li>
-</ol>
-<h2 id="B-树索引和哈希索引的区别"><a href="#B-树索引和哈希索引的区别" class="headerlink" title="B+树索引和哈希索引的区别"></a>B+树索引和哈希索引的区别</h2><p>B+树是一个平衡的多叉树，从根节点到每个叶子节点的高度差值不超过1，而且同层级的节点间有指针相互链接，是有序的</p>
-<p>哈希索引就是采用一定的哈希算法，把键值换算成新的哈希值，检索时不需要类似B+树那样从根节点到叶子节点逐级查找，只需一次哈希算法即可,是无序的</p>
-<p><strong>哈希索引的优势：</strong></p>
-<p>等值查询。哈希索引具有绝对优势（前提是：没有大量重复键值，如果大量重复键值时，哈希索引的效率很低，因为存在所谓的哈希碰撞问题。）</p>
-<p><strong>哈希或因不适用的场景：</strong></p>
-<ol>
-<li>不支持范围查询</li>
-<li>不支持索引完成排序</li>
-<li>不支持联合索引的最左前缀匹配规则</li>
-</ol>
-<p>通常，B+树索引结构适用于绝大多数场景，像下面这种场景用哈希索引才更有优势：</p>
-<p>在HEAP表中，如果存储的数据重复度很低（也就是说基数很大），对该列数据以等值查询为主，没有范围查询、没有排序的时候，特别适合采用哈希索引，例如这种SQL：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select id,name from table where name&#x3D;&#39;李明&#39;; — 仅等值查询</span><br></pre></td></tr></table></figure>
-
-<p>而常用的InnoDB引擎中默认使用的是B+树索引，它会实时监控表上索引的使用情况，如果认为建立哈希索引可以提高查询效率，则自动在内存中的“自适应哈希索引缓冲区”建立哈希索引（在InnoDB中默认开启自适应哈希索引），通过观察搜索模式，MySQL会利用index key的前缀建立哈希索引，如果一个表几乎大部分都在缓冲池中，那么建立一个哈希索引能够加快等值查询。</p>
-<p>注意：在某些工作负载下，通过哈希索引查找带来的性能提升远大于额外的监控索引搜索情况和保持这个哈希表结构所带来的开销。但某些时候，在负载高的情况下，自适应哈希索引中添加的read/write锁也会带来竞争，比如高并发的join操作。like操作和%的通配符操作也不适用于自适应哈希索引，可能要关闭自适应哈希索引。</p>
-<h2 id="为什么说B-比B树更适合实际应用中操作系统的文件索引和数据库索引"><a href="#为什么说B-比B树更适合实际应用中操作系统的文件索引和数据库索引" class="headerlink" title="为什么说B+比B树更适合实际应用中操作系统的文件索引和数据库索引"></a>为什么说B+比B树更适合实际应用中操作系统的文件索引和数据库索引</h2><ol>
-<li>B+的磁盘读写代价更低B+的内部结点并没有指向关键字具体信息的指针。因此其内部结点相对B树更小。如果把所有同一内部结点的关键字存放在同一盘块中，那么盘块所能容纳的关键字数量也越多。一次性读入内存中的需要查找的关键字也就越多。相对来说IO读写次数也就降低了。</li>
-<li>B+-tree的查询效率更加稳定由于非终结点并不是最终指向文件内容的结点，而只是叶子结点中关键字的索引。所以任何关键字的查找必须走一条从根结点到叶子结点的路。所有关键字查询的路径长度相同，导致每一个数据的查询效率相当。</li>
-</ol>
-<h2 id="Mysql联合索引"><a href="#Mysql联合索引" class="headerlink" title="Mysql联合索引"></a>Mysql联合索引</h2><ol>
-<li>联合索引是两个或更多个列上的索引。对于联合索引:Mysql从左到右的使用索引中的字段，一个查询可以只使用索引中的一部份，但只能是最左侧部分。例如索引是key index (a,b,c). 可以支持a 、 a,b 、 a,b,c 3种组合进行查找，但不支持 b,c进行查找 .当最左侧字段是常量引用时，索引就十分有效。</li>
-<li>利用索引中的附加列，您可以缩小搜索的范围，但使用一个具有两列的索引 不同于使用两个单独的索引。复合索引的结构与电话簿类似，人名由姓和名构成，电话簿首先按姓氏对进行排序，然后按名字对有相同姓氏的人进行排序。如果您知 道姓，电话簿将非常有用；如果您知道姓和名，电话簿则更为有用，但如果您只知道名不姓，电话簿将没有用处。</li>
-</ol>
-<h2 id="什么情况应不建或少建索引"><a href="#什么情况应不建或少建索引" class="headerlink" title="什么情况应不建或少建索引"></a>什么情况应不建或少建索引</h2><ol>
-<li>表记录太少</li>
-<li>经常插入、删除、修改的表</li>
-<li>数据重复且分布平均的表字段，假如一个表有10万行记录，有一个字段A只有T和F两种值，且每个值的分布概率大约为50%，那么对这种表A字段建索引一般不会提高数据库的查询速度。</li>
-<li>经常和主字段一块查询但主字段索引值比较多的表字段</li>
-</ol>
-
+    <h1 id="Mysql常问问题"><a href="#Mysql常问问题" class="headerlink" title="Mysql常问问题"></a>Mysql常问问题</h1>
+    
+    <a class="article-more-a" href="/2020/08/06/Mysql%E5%BC%80%E5%8F%91%E5%B2%97%E9%9D%A2%E8%AF%95%E4%B8%AD%E5%B8%B8%E9%97%AE%E9%A2%98/#more">more >></a>
+    
     
 
     
@@ -523,43 +447,9 @@
   <div class="article-entry" itemprop="articleBody">
     
     <h2 id="SpringBoot简介"><a href="#SpringBoot简介" class="headerlink" title="SpringBoot简介"></a>SpringBoot简介</h2><p><strong>核心：</strong>约定大于配置</p>
-<h3 id="Spring是如何简化java开发的"><a href="#Spring是如何简化java开发的" class="headerlink" title="Spring是如何简化java开发的"></a>Spring是如何简化java开发的</h3><p>为了降低java开发的复杂性，Spring采用了以下4种关键策略</p>
-<ol>
-<li>基于pojo的轻量级和最小侵入性编程</li>
-<li>通过IOC，依赖注入（DI）和面向接口实现松耦合</li>
-<li>基于切面（AOP）和惯例进行声明式编程</li>
-<li>通过切面和模板减少样式代码</li>
-</ol>
-<h3 id="SpringBootd的主要优点"><a href="#SpringBootd的主要优点" class="headerlink" title="SpringBootd的主要优点"></a>SpringBootd的主要优点</h3><ul>
-<li>为所有Spring开发者更快的入门</li>
-<li>开箱即用，提供各种默认配置来简化项目配置</li>
-<li>内嵌式容器简化Web项目</li>
-<li>没有冗余代码生成和XML配置的要求</li>
-</ul>
-<h2 id="springboot原理（一丢丢）"><a href="#springboot原理（一丢丢）" class="headerlink" title="springboot原理（一丢丢）"></a>springboot原理（一丢丢）</h2><h3 id="自动配置"><a href="#自动配置" class="headerlink" title="自动配置"></a>自动配置</h3><h4 id="pom-xml"><a href="#pom-xml" class="headerlink" title="pom.xml"></a><strong>pom.xml</strong></h4><ul>
-<li>spring-boot-denpendencies：核心依赖在父工程</li>
-<li>我们在写入或者引入一些springboot依赖的时候，不需要指定版本，就是因为有版本仓库</li>
-</ul>
-<p><img src="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200806190652282.png" alt="image-20200806190652282"></p>
-<hr>
-<h4 id="启动器"><a href="#启动器" class="headerlink" title="启动器"></a>启动器</h4><ul>
-<li><pre><code class="xml"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span>
-    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>
-    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>
-<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>
-<span class="comment"><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 启动器：就是springboot的启动场景</span><br><span class="line"></span><br><span class="line">- 比如上面这个启动器，他就会帮我们自动岛主web环境所有的依赖</span><br><span class="line"></span><br><span class="line">- springboot会将所有的功能场景都变成一个个的启动器</span><br><span class="line"></span><br><span class="line">- 我们要使用什么功能，就只需要找到对应的启动器就可以了 &#96;&#96;&#96;starter</span><br></pre></td></tr></table></figure></span>
-</code></pre>
-</li>
-</ul>
-<p><strong>小结：</strong>springboot所有的配置都是在启动的时候扫描并加载：spring。factories所有的自动配置类都在这里面，但是不一定生效，要判断条件是否成立，只要导入了对应的start，就有对应的启动器有了启动器，我们自动装配就会生效，然后就配置成功了。</p>
-<ol>
-<li>SpringBoot在启动的时候从类路径下的META-INF/spring.factories中获取EnableAutoConfiguration指定的值</li>
-<li>将这些值作为自动配置类导入容器 ， 自动配置类就生效 ， 帮我们进行自动配置工作；</li>
-<li>整个J2EE的整体解决方案和自动配置都在springboot-autoconfigure的jar包中；</li>
-<li>它会给容器中导入非常多的自动配置类 （xxxAutoConfiguration）, 就是给容器中导入这个场景需要的所有组件 ， 并配置好这些组件 ；</li>
-<li>有了自动配置类 ， 免去了我们手动编写配置注入功能组件等的工作；</li>
-</ol>
-
+    
+    <a class="article-more-a" href="/2020/08/05/SpringBoot%E5%AD%A6%E4%B9%A0%EF%BC%88idea%EF%BC%89/#more">more >></a>
+    
     
 
     
