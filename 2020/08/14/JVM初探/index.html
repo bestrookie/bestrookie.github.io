@@ -6,17 +6,37 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: Swagger | bestrookie的折腾之路</title>
+  <title>JVM初探 | bestrookie的折腾之路</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta property="og:type" content="website">
-<meta property="og:title" content="bestrookie的折腾之路">
-<meta property="og:url" content="http://yoursite.com/tags/Swagger/index.html">
+  <meta name="description" content="JVM学习笔记关于jvm面试常问  请你谈谈你对jvm的理解？java8虚拟机和之前的变化更新？ 什么是OOM（内存溢出），什么是栈溢出StackOverFlowError？怎么分析？ JVM的常用调优参数有哪些？ 内存快照如何抓取，怎么分析Dump文件？ 谈谈JVM中类加载器的认识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM初探">
+<meta property="og:url" content="http://yoursite.com/2020/08/14/JVM%E5%88%9D%E6%8E%A2/index.html">
 <meta property="og:site_name" content="bestrookie的折腾之路">
+<meta property="og:description" content="JVM学习笔记关于jvm面试常问  请你谈谈你对jvm的理解？java8虚拟机和之前的变化更新？ 什么是OOM（内存溢出），什么是栈溢出StackOverFlowError？怎么分析？ JVM的常用调优参数有哪些？ 内存快照如何抓取，怎么分析Dump文件？ 谈谈JVM中类加载器的认识">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200815215604600.png">
+<meta property="og:image" content="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200815215931409.png">
+<meta property="og:image" content="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/jvm.png">
+<meta property="og:image" content="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200815231929573.png">
+<meta property="og:image" content="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200815233709965.png">
+<meta property="og:image" content="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200816220232055.png">
+<meta property="og:image" content="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200816220316367.png">
+<meta property="og:image" content="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200816230420086.png">
+<meta property="og:image" content="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200820000249003.png">
+<meta property="og:image" content="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200819233929859.png">
+<meta property="og:image" content="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200820000204071.png">
+<meta property="og:image" content="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200820084448655.png">
+<meta property="og:image" content="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200820112149623.png">
+<meta property="article:published_time" content="2020-08-14T05:04:04.000Z">
+<meta property="article:modified_time" content="2020-08-20T07:06:49.545Z">
 <meta property="article:author" content="bestrookie">
+<meta property="article:tag" content="JVM">
+<meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200815215604600.png">
   
     <link rel="alternative" href="/atom.xml" title="bestrookie的折腾之路" type="application/atom+xml">
   
@@ -219,73 +239,430 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-JVM初探" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/08/12/Swagger%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-        <time datetime="2020-08-12T14:03:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-12</time>
-</a>
-
-        </div>
-    	 
+      <header class="article-header">
   
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/08/12/Swagger%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_blank">Spring集成Swagger</a>
   
+    <h1 class="article-title" itemprop="name">
+      JVM初探
     </h1>
   
 
 
-        <div class="article-info info-on-right">
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2020/08/14/JVM%E5%88%9D%E6%8E%A2/" class="archive-article-date">
+        <time datetime="2020-08-14T05:04:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-14</time>
+</a>
+
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">4.9k字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">17分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="JVM学习笔记"><a href="#JVM学习笔记" class="headerlink" title="JVM学习笔记"></a>JVM学习笔记</h1><p><strong>关于jvm面试常问</strong></p>
+<ul>
+<li>请你谈谈你对jvm的理解？java8虚拟机和之前的变化更新？</li>
+<li>什么是OOM（内存溢出），什么是栈溢出StackOverFlowError？怎么分析？</li>
+<li>JVM的常用调优参数有哪些？</li>
+<li>内存快照如何抓取，怎么分析Dump文件？</li>
+<li>谈谈JVM中类加载器的认识</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="JVM的位置"><a href="#JVM的位置" class="headerlink" title="JVM的位置"></a>JVM的位置</h2><p><img src="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200815215604600.png" alt="image-20200815215604600"></p>
+<h2 id="JVM的体系结构"><a href="#JVM的体系结构" class="headerlink" title="JVM的体系结构"></a>JVM的体系结构</h2><p><img src="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200815215931409.png" alt="image-20200815215931409"></p>
+<p>百分之99的JVM调优都是在堆中调优，java栈、本地方法栈、程序计数器是不会有垃圾存在的。</p>
+<h2 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h2><p><strong>作用：</strong>加载Class文件</p>
+<p><img src="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/jvm.png" alt="jvm"></p>
+<ol>
+<li>虚拟机自带的加载器</li>
+<li>启动类（根加载器）</li>
+<li>扩展类加载器</li>
+<li>应用程序加载器</li>
+</ol>
+<h2 id="双亲委派机制（重要）"><a href="#双亲委派机制（重要）" class="headerlink" title="双亲委派机制（重要）"></a>双亲委派机制（重要）</h2><p>双亲委派机制：保证安全</p>
+<p>APP–&gt;EXC–&gt;BOOT（最终执行）</p>
+<p>BOOT–&gt;EXC–&gt;APP</p>
+<p>对上面进行解释</p>
+<ol>
+<li>类加载器收到类加载的请求</li>
+<li>将这个请求向上委托给父类加载器去完成，一直向上委托，直到启动类加载器（根加载器）</li>
+<li>启动器加载检查是否能够加载当前这个类，能加载就结束，使用当前的加载器，否则，抛出异常，通知子加载器进行加载</li>
+<li>重复步骤3</li>
+</ol>
+<h2 id="沙箱安全机制"><a href="#沙箱安全机制" class="headerlink" title="沙箱安全机制"></a>沙箱安全机制</h2><p>java安全模型的核心就是java沙箱（sandbox）</p>
+<h3 id="什么是沙箱安全机制"><a href="#什么是沙箱安全机制" class="headerlink" title="什么是沙箱安全机制"></a>什么是沙箱安全机制</h3><p>沙箱是一个限制程序运行的环境。沙箱机制就是<strong>将java代码限定在虚拟机（JVM）特定的运行范围中，并且严格限制代码对本地系统资源访问</strong>，通过这样的措施来保证对代码的有效隔离，防止对本地系统造成破坏。</p>
+<h3 id="系统资源包括-？"><a href="#系统资源包括-？" class="headerlink" title="系统资源包括 ？"></a>系统资源包括 ？</h3><p>CPU、内存、文件系统、网络。不同级别的沙箱对这些资源访问的限制也可以不一样</p>
+<h3 id="沙箱安全模型"><a href="#沙箱安全模型" class="headerlink" title="沙箱安全模型"></a>沙箱安全模型</h3><p>所有的java程序都可以指定沙箱，可以定制安全策略。</p>
+<p>在java中将执行程序分成本地代码和远程代码，本地代码默认视为可信任的，而远程代码则被看作是不受信的。对于授信的本地代码，可以访问一切本地资源，而对于非授信的远程代码在早期的java实现中，安全依赖于沙箱（sanbox）机制。如下去所示jdkl1.0安全模型</p>
+<p><img src="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200815231929573.png" alt="image-20200815231929573"></p>
+<p>但如此严格的安全机制也给程序的功能扩展带来障碍，比如当用户希望远程代码访问本地系统的文件的时候，就无法实现。因此在后续的java1.1版本中，针对安全机制做了改进，增加了安全策略，允许用户指定代码对本地资源的访问权限。如下图所示jdk1.1安全模型</p>
+<p><img src="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200815233709965.png" alt="image-20200815233709965"></p>
+<p>在java1.2版本中，再次改进了安全机制，增加代码签名。不论本地代码或是远程代码，都会按照用户的安全策略设定，由类加载器加载到虚拟机中权限不同运行空间，来实现差异代的代码执行权限控制。如下图所示</p>
+<p><img src="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200816220232055.png" alt="image-20200816220232055"></p>
+<p>当前最新的安全机制，则引入了域（Domain）的概念。虚拟机会把所有代码加载到不同的而系统域和应用域，系统域部分专门负责与关键资源进行交互，而各个应用域部分则通过系统域的部分代理来对各种需要的资源进行访问。虚拟机中不同的收保护域（Projected Domain），对应不一样的权限（Permission）。存在于不同域的类文件就具有了当前域的全部权限，如下图最新的安全模型（jdk1.6）</p>
+<p><img src="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200816220316367.png" alt="image-20200816220316367"></p>
+<h3 id="组成沙箱的基本组件"><a href="#组成沙箱的基本组件" class="headerlink" title="组成沙箱的基本组件"></a>组成沙箱的基本组件</h3><p>●字节码校验器(bytecode verifier) :确保Java类文件遵循Java语言规范。这样可以帮助Java程序实现内存保护。但并不是所有的类文件都会经过字节码校验，比如核心类。<br>●类裝载器(class loader) :其中类装载器在3个方面对Java沙箱起作用<br>  它防止恶意代码去干涉善意的代码;<br>  它守护了被信任的类库边界;<br>  它将代码归入保护域,确定了代码可以进行哪些操作。<br> 虚拟机为不同的类加载器载入的类提供不同的命名空间，命名空间由一系列唯一的名称组成， 每一个被装载的类将有一个名字，这个命名空间是由Java虚拟机为每一个类装载器维护的，它们互相之间甚至不可见。<br> 类装载器采用的机制是双亲委派模式。<br> 1.从最内层JVM自带类加载器开始加载,外层恶意同名类得不到加载从而无法使用;<br> 2.由于严格通过包来区分了访问域,外层恶意的类通过内置代码也无法获得权限访问到内层类，破坏代码就自然无法生效。<br>●存取控制器(access controller) :存取控制器可以控制核心API对操作系统的存取权限，而这个控制的策略设定,可以由用户指定。<br>●安全管理器(security manager) : 是核心API和操作系统之间的主要接口。实现权限控制，比存取控制器优先级高。<br>●安全软件包(security package) : java.security下的类和扩展包下的类，允许用户为自己的应用增加新的安全特性，包括:</p>
+<p> 安全提供者<br> 消息摘要<br> 数字签名<br> 加密<br> 鉴别</p>
+<h2 id="Native"><a href="#Native" class="headerlink" title="Native"></a>Native</h2><ul>
+<li>native：凡是带了native关键字的，说明java的作用范围达不到了，<strong>回去调用底层C语言的库</strong></li>
+<li>会进入本地方法栈</li>
+<li>调用本地方法接口<strong>JNI（java Native Interface）</strong></li>
+<li>JNI作用：开拓java的使用，融合不同的编程语言为Java所用</li>
+<li>Java诞生的时候C、C++横行，想要立足，必须要有调用C、C++的程序</li>
+<li>它在内存区域中专门开辟了一块标记区域：Native Method Stack，登记native方法</li>
+<li>在最终执行的狮虎，加载本地方法库中的方法通过JNI。例如：Java程序驱动打印机</li>
+</ul>
+<h3 id="Native-Method-Stack"><a href="#Native-Method-Stack" class="headerlink" title="Native Method Stack"></a>Native Method Stack</h3><p>它的具体做法是Native Method Stack中登记native方法，在（Execution Engine）执行引擎的时候加载Native Libraies（本地库）</p>
+<h3 id="Native-Interface本地接口"><a href="#Native-Interface本地接口" class="headerlink" title="Native Interface本地接口"></a>Native Interface本地接口</h3><p>本地接口的作用是融合不同的编程语言为Java所用，它的初衷是融合C/C++程序，于是就在内存中专门开辟了块区域处理标记native的代码，它的具体做法是在Native Method Stack中登记native方法，在（Execution Engine）执行引擎的时候加载Native Libraies（本地库）。</p>
+<p>目前该方法使用的越来越少了，除非是与硬件有关的应用，比如通过Java程序驱动打印机或者Java系统管理生产设备，在企业级应用中已经比较少见。因为现在的异构领域间通信很发达，比如可以使用Socket通信,也可以使用Web Service等等，不多做介绍!</p>
+<h2 id="PC寄存器"><a href="#PC寄存器" class="headerlink" title="PC寄存器"></a>PC寄存器</h2><p>程序计数器: Program Counter Register<br> 每个线程都有一个程序计数器，是线程私有的，就是一个指针, 指向方法区中的方法字节码(用来存储指向像一条指令的地址， 也即将要执行的指令代码)，在执行引擎读取下一条指令, 是一个非常小的内存空间，几乎可以忽略不计</p>
+<h2 id="方法区-Method-Area"><a href="#方法区-Method-Area" class="headerlink" title="方法区 Method Area"></a>方法区 Method Area</h2><p>方法区是被所有线程共享，所有字段和方法字节码以及一些特殊方法，如构造方法，接口代码也在此定义，简单说，所有的信息都保存在该区域，此区域属于共享区间；</p>
+<p><strong>静态变量、常量、类信息（构造方法、接口定义）、运行时的常量池存在方法区中，但是实例变量存在堆内存中，和方法区无关</strong></p>
+<p>static、final、Class、常量池</p>
+<p><strong>简单样例：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String a;</span><br><span class="line">    <span class="keyword">private</span> String name = <span class="string">"bestrookie"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200816230420086.png" alt="image-20200816230420086"></p>
+<h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><p>栈：先进后出</p>
+<p>队列：先进先出（FIFO：First Input First Output）</p>
+<p>栈：栈内存，主管程序的运行，生命周期和线程同步；线程结束，栈内存也就是释放，对于栈来说，不存在垃圾回收问题，一旦线程结束，栈就结束。</p>
+<h2 id="栈内存中的存在"><a href="#栈内存中的存在" class="headerlink" title="栈内存中的存在"></a>栈内存中的存在</h2><p>八大基本类型+对象引用+实例的方法</p>
+<h2 id="栈运行原理：栈帧"><a href="#栈运行原理：栈帧" class="headerlink" title="栈运行原理：栈帧"></a>栈运行原理：栈帧</h2><p>如果栈满了：StackOverflowError（栈溢出）</p>
+<h3 id="栈的位置："><a href="#栈的位置：" class="headerlink" title="栈的位置："></a>栈的位置：</h3><p><img src="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200820000249003.png" alt="image-20200820000249003"></p>
+<h3 id="栈帧图解："><a href="#栈帧图解：" class="headerlink" title="栈帧图解："></a>栈帧图解：</h3><p><img src="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200819233929859.png" alt="image-20200819233929859"></p>
+<h2 id="JVM的种类"><a href="#JVM的种类" class="headerlink" title="JVM的种类"></a>JVM的种类</h2><ul>
+<li>Sun公司HotSpot Java Hotspot™ 64-Bit Server VM (build 25.181-b13,mixed mode)</li>
+<li>BEA JRockit</li>
+<li>IBM J9VM</li>
+</ul>
+<p>我们学习都是: <strong>Hotspot</strong></p>
+<h2 id="堆（Heap）"><a href="#堆（Heap）" class="headerlink" title="堆（Heap）"></a>堆（Heap）</h2><p> 一个JVM只有一个堆内存，堆内存的大小是可以调节的。<br>类加载器读取了类文件后，一般会把什么东西放到堆中?<br>类, 方法，常量,变量~，保存我们所有引用类型的真实对象;<br>堆内存中还要细分为三个区域:</p>
+<ul>
+<li>新生区（伊甸园区）Yong/New</li>
+<li>养老去 Old</li>
+<li>永久区 Perm</li>
+</ul>
+<p><img src="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200820000204071.png" alt="image-20200820000204071"></p>
+<p>GC垃圾回收，主要是在新生区和老年区</p>
+<p><strong>内存溢出（内存溢出）：</strong>堆内存不够,java.lang.OutOfMemoryError:Java heap space</p>
+<p>永久存储区里存放的都是java自带的，例如lang包中的类，如果不存这些，java就跑不起来</p>
+<p>在<strong>jdk8</strong>以后，永久存存储区改名为（元空间）</p>
+<h2 id="新生区"><a href="#新生区" class="headerlink" title="新生区"></a>新生区</h2><ul>
+<li><p>类诞生、成长甚至死亡的地方</p>
+</li>
+<li><p>所有的对象都是从伊甸园区new出来的</p>
+</li>
+<li><p>有两个幸存区</p>
+</li>
+</ul>
+<p><strong>伊甸园区满了就出发轻GC，经过轻GC存活下来的就到了幸存者区，幸存区满了之后意味着新生新生区也满了，则触发重GC，经过中GC之后存活下来的就到了养老区。</strong></p>
+<p>99%的对象都是临时对象，会在伊甸园区或者幸存区就被处理掉了</p>
+<h2 id="永久区"><a href="#永久区" class="headerlink" title="永久区"></a>永久区</h2><p><strong>这个区域常驻内存。用来存放JDK自身携带的Class对象。Interface元数据，存储的是Java运行时的一些环境，这个区域不存在垃圾回收，关闭虚拟机就会释放内存</strong></p>
+<ul>
+<li>jdk1.6之前:永久代,常量池是在方法区;</li>
+<li>jdk1.7:永久代,但是慢慢的退化了，去永久代，常量池在堆中</li>
+<li>jdk1.8之后:无永久代,常量池在元空间</li>
+</ul>
+<p>元空间：逻辑上存在，物理上不存在（存储在物理磁盘内）所以并不算在JVM虚拟机内存中</p>
+<p><img src="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200820084448655.png" alt="image-20200820084448655"></p>
+<h2 id="堆内存调优"><a href="#堆内存调优" class="headerlink" title="堆内存调优"></a>堆内存调优</h2><p>内存快照分析工具：Jprofiler(idea)、MAT（eclipse）</p>
+<p><strong>Jprofiler作用</strong></p>
+<ul>
+<li>分析Dump内存文件，快速定位内存泄漏</li>
+<li>获得堆中的数据</li>
+<li>获得大的对象</li>
+</ul>
+<p>Jprofile使用</p>
+<ol>
+<li><p>在idea中下载jprofile插件</p>
+</li>
+<li><p>下载jprofiler客户端</p>
+</li>
+<li><p>在idea中VM参数-Xms1m -Xmx8m -XX: +HeapDumpOnOutOfMemoryError</p>
+</li>
+<li><p>运行程序后在jprofile客户端中打开找到错误告诉哪个位置报错</p>
+</li>
+<li><p>-Xms1m -Xmx8m -XX: +HeapDumpOnOutOfMemoryError</p>
+<p>// -Xms设置初始化内存分配大小/164<br>// -Xmx设置最大分配内存，默以1/4<br>// -XX: +PrintGCDetails // 打印GC垃圾回收信息<br>// -XX: +HeapDumpOnOutOfMemoryError //oom DUMP</p>
+</li>
+</ol>
+<h2 id="GC"><a href="#GC" class="headerlink" title="GC"></a>GC</h2><p>JVM在进行GC时，并不是对三个区域统一回收，回收都是新生代</p>
+<p>GC两种类：轻GC（Minor GC），重GC（Full GC）</p>
+<h3 id="轻GC和重GC分别在什么时候发生"><a href="#轻GC和重GC分别在什么时候发生" class="headerlink" title="轻GC和重GC分别在什么时候发生"></a>轻GC和重GC分别在什么时候发生</h3><p><strong>轻GC：</strong>是新生代GC，指的是发生在新生代的垃圾收集动作。由于java对象大都是朝生夕死的，所以Minor GC非常平凡，一般回收速度也比较快。</p>
+<p><strong>重GC：</strong>是老年代GC，指的是发生在老年代的GC，出现重GC一般经常会伴有轻GC，重GC的速度比轻GC慢的多。</p>
+<p><strong>Minor GC：</strong>当JVM无法为新的对象分配空间的时候（Eden区域满了）就会发生Minor GC，所以分配对象的频率越高，也就越容易发生Minor GC</p>
+<p><strong>Full GC：</strong>发生GC有两种情况，①当老年代无法分配内存的时候，会导致MinorGC,②当发生Minor GC的时候可能触发Full GC，由于老年代要对年轻代进行担保，由于进行一次垃圾回收之前是无法确定有多少对象存活，因此老年代并不能清除自己要担保多少空间，因此采取采用动态估算的方法：也就是上一次回收发送时晋升到老年代的对象容量的平均值作为经验值，这样就会有一个问题，当发生一次Minor GC以后，存活的对象剧增（假设小对象），此时老年代并没有满，但是此时平均值增加了，会造成发生Full GC</p>
+<h3 id="GC的主要算法"><a href="#GC的主要算法" class="headerlink" title="GC的主要算法"></a>GC的主要算法</h3><h3 id="标记清除算法"><a href="#标记清除算法" class="headerlink" title="标记清除算法"></a>标记清除算法</h3><p>分为标记和清除两个阶段：在标记阶段标记被引用的对象，未被标记的对象是未被引用的垃圾对象，然后在清除阶段清除所有未被标记对象。</p>
+<p>清除后产生了大量不连续的内存碎片，导致在程序运行过程中需要分配较大对象的时候，无法找到足够的连续内存而不得不提前触发一次垃圾收集动作。</p>
+<h3 id="复制算法（一般用于新生代）"><a href="#复制算法（一般用于新生代）" class="headerlink" title="复制算法（一般用于新生代）"></a>复制算法（一般用于新生代）</h3><p>将现有的空间分为两块，每次只使用其中一块，在垃圾回收的时候将正在使用的内存中的存活对象复制到未被使用的内存块中，之后清除正在使用的内存块中所有对象，交换两个内存的角色完成垃圾回收。</p>
+<p><strong>它浪费了一半的内存</strong></p>
+<p>如果对象的存活率很高，我们可以极端一点，假设是100%存活，那么我们需要将所有对象都复制一遍，并将所有引用地址重置一遍。<strong>复制这一工作所花费的时间，在对象存活率达到一定程度时，将会变的不可忽视</strong>。</p>
+<h3 id="标记整理算法（一般用于老年代）"><a href="#标记整理算法（一般用于老年代）" class="headerlink" title="标记整理算法（一般用于老年代）"></a>标记整理算法（一般用于老年代）</h3><p> <strong>标记：</strong>它的第一个阶段与标记/清除算法是一模一样的，均是遍历GC Roots，然后将存活的对象标记。</p>
+<p> <strong>整理：</strong>移动所有存活的对象，且按照内存地址次序依次排列，然后将末端内存地址以后的内存全部回收。因此，第二阶段才称为整理阶段。</p>
+<p><strong>效率也不高</strong>，不仅要标记所有存活对象，还要整理所有存活对象的引用地址。从效率上来说，标记/整理算法要低于复制算法。</p>
+<h2 id="JMM"><a href="#JMM" class="headerlink" title="JMM"></a>JMM</h2><h3 id="什么是JMM"><a href="#什么是JMM" class="headerlink" title="什么是JMM"></a>什么是JMM</h3><p>JMM即为JAVA 内存模型（java memory model）。因为在不同的硬件生产商和不同的操作系统下，内存的访问逻辑有一定的差异，结果就是当你的代码在某个系统环境下运行良好，并且线程安全，但是换了个系统就出现各种问题。Java内存模型，就是为了屏蔽系统和硬件的差异，让一套代码在不同平台下能到达相同的访问结果。JMM从java 5开始的JSR-133发布后，已经成熟和完善起来。</p>
+<h3 id="内存划分"><a href="#内存划分" class="headerlink" title="内存划分"></a>内存划分</h3><p>JMM规定了内存主要划分为主内存和工作内存两种。此处的主内存和工作内存跟JVM内存划分（堆、栈、方法区）是在不同的层次上进行的，如果非要对应起来，主内存对应的是Java堆中的对象实例部分，工作内存对应的是栈中的部分区域，从更底层的来说，主内存对应的是硬件的物理内存，工作内存对应的是寄存器和高速缓存。</p>
+<p><img src="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200820112149623.png" alt="image-20200820112149623"></p>
+<p>JVM在设计时候考虑到，如果JAVA线程每次读取和写入变量都直接操作主内存，对性能影响比较大，所以每条线程拥有各自的工作内存，工作内存中的变量是主内存中的一份拷贝，线程对变量的读取和写入，直接在工作内存中操作，而不能直接去操作主内存中的变量。但是这样就会出现一个问题，当一个线程修改了自己工作内存中变量，对其他线程是不可见的，会导致线程不安全的问题。因为JMM制定了一套标准来保证开发者在编写多线程程序的时候，能够控制什么时候内存会被同步给其他线程。</p>
+<h2 id="内存交互操作"><a href="#内存交互操作" class="headerlink" title="内存交互操作"></a>内存交互操作</h2><p>内存交互操作有8种，虚拟机实现必须保证每一个操作都是原子的，不可在分的（对于double和long类型的变量来说，load、store、read和write操作在某些平台上允许例外）</p>
+<ul>
+<li>lock   （锁定）：作用于主内存的变量，把一个变量标识为线程独占状态</li>
+<li>unlock （解锁）：作用于主内存的变量，它把一个处于锁定状态的变量释放出来，释放后的变量才可以被其他线程锁定</li>
+<li>read  （读取）：作用于主内存变量，它把一个变量的值从主内存传输到线程的工作内存中，以便随后的load动作使用</li>
+<li>load   （载入）：作用于工作内存的变量，它把read操作从主存中变量放入工作内存中</li>
+<li>use   （使用）：作用于工作内存中的变量，它把工作内存中的变量传输给执行引擎，每当虚拟机遇到一个需要使用到变量的值，就会使用到这个指令</li>
+<li>assign （赋值）：作用于工作内存中的变量，它把一个从执行引擎中接受到的值放入工作内存的变量副本中</li>
+<li>store  （存储）：作用于主内存中的变量，它把一个从工作内存中一个变量的值传送到主内存中，以便后续的write使用</li>
+<li>write 　（写入）：作用于主内存中的变量，它把store操作从工作内存中得到的变量的值放入主内存的变量中</li>
+</ul>
+<p>JMM对这八种指令的使用，制定了如下规则：</p>
+<ul>
+<li>不允许read和load、store和write操作之一单独出现。即使用了read必须load，使用了store必须write</li>
+<li>不允许线程丢弃他最近的assign操作，即工作变量的数据改变了之后，必须告知主存</li>
+<li>不允许一个线程将没有assign的数据从工作内存同步回主内存</li>
+<li>一个新的变量必须在主内存中诞生，不允许工作内存直接使用一个未被初始化的变量。就是怼变量实施use、store操作之前，必须经过assign和load操作</li>
+<li>一个变量同一时间只有一个线程能对其进行lock。多次lock后，必须执行相同次数的unlock才能解锁</li>
+<li>如果对一个变量进行lock操作，会清空所有工作内存中此变量的值，在执行引擎使用这个变量前，必须重新load或assign操作初始化变量的值</li>
+<li>如果一个变量没有被lock，就不能对其进行unlock操作。也不能unlock一个被其他线程锁住的变量</li>
+<li>对一个变量进行unlock操作之前，必须把此变量同步回主内存</li>
+</ul>
+
+    
+
+    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/weixin.png">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
+        </div>
+      </a>
+    </div>
+    
+
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          bestrookie
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="http://yoursite.com/2020/08/14/JVM初探/" title="JVM初探" target="_blank">http://yoursite.com/2020/08/14/JVM初探/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
           
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Swagger</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+    
 
     
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/08/14/JVM%E5%88%9D%E6%8E%A2/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2020/08/12/Swagger%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Spring集成Swagger</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+
+
+  <div id="giteement-ctn"></div>
+  
+    <link rel="stylesheet" href="/lib/default.css">
+    <script src="/lib/giteement.browser.js"></script>
+  
+  <script>
+  <!-- id: "JVM初探" -->
+  var giteement = new Giteement({
+    id: '20200814130404',
+    owner: 'best_rookie',
+    repo: 'bestrookie',
+    backcall_uri: 'https://bestrookie.github.io/',
+    oauth_uri: 'https://cors-anywhere.herokuapp.com/https://gitee.com/oauth/token',
+    oauth: {
+      client_id: '340defa01761b89569963f98dd9ddb2c116c462154f448b9ca449c8a418faa25',
+      client_secret: '50015bcb573e760cb5369129f1689d61778f911b5a3430eeca841cf4a1a195d0'
+    },
+  })
+  giteement.render('giteement-ctn')
+  </script>
+
+
+
+
+
+
 
 
           </div>
@@ -326,9 +703,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
