@@ -18,7 +18,7 @@
 <meta property="og:description" content="Mysql常问问题">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-08-06T14:53:16.000Z">
-<meta property="article:modified_time" content="2020-08-13T06:44:09.341Z">
+<meta property="article:modified_time" content="2020-09-08T15:41:02.864Z">
 <meta property="article:author" content="bestrookie">
 <meta property="article:tag" content="Mysql">
 <meta name="twitter:card" content="summary">
@@ -26,7 +26,7 @@
     <link rel="alternative" href="/atom.xml" title="bestrookie的折腾之路" type="application/atom+xml">
   
   
-    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/img/01.jpg">
   
   
     <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png">
@@ -47,6 +47,22 @@
  	  <script src="/lib/clickLove.js"></script>
   
   
+
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+
+</script>
+
 
 
   
@@ -490,6 +506,19 @@
         </div>
         
         
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mysql常问问题"><span class="toc-number">1.</span> <span class="toc-text">Mysql常问问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么用自增列为主键"><span class="toc-number">1.1.</span> <span class="toc-text">为什么用自增列为主键</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么使用数据索引能提高效率"><span class="toc-number">1.2.</span> <span class="toc-text">为什么使用数据索引能提高效率</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B-树索引和哈希索引的区别"><span class="toc-number">1.3.</span> <span class="toc-text">B+树索引和哈希索引的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么说B-比B树更适合实际应用中操作系统的文件索引和数据库索引"><span class="toc-number">1.4.</span> <span class="toc-text">为什么说B+比B树更适合实际应用中操作系统的文件索引和数据库索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mysql联合索引"><span class="toc-number">1.5.</span> <span class="toc-text">Mysql联合索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么情况应不建或少建索引"><span class="toc-number">1.6.</span> <span class="toc-text">什么情况应不建或少建索引</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
     </div>
 </aside>
 
@@ -656,11 +685,15 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -669,10 +702,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Swagger</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -769,6 +798,15 @@
                   <i class="icon-link icon"></i>
                 
                 CSDN
+              </a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://easyremember.cn" target="_blank" class="search-title" >
+                
+                  <img src="https://cdn.jsdelivr.net/gh/fengjing95/cdn@1.2/img/custom/avatar.jpg">
+                
+                前端小枫
               </a>
             </li>
           

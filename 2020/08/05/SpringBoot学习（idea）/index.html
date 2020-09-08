@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200907174408597.png">
 <meta property="og:image" content="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20200907232008590.png">
 <meta property="article:published_time" content="2020-08-05T14:40:05.000Z">
-<meta property="article:modified_time" content="2020-09-07T15:23:41.094Z">
+<meta property="article:modified_time" content="2020-09-08T15:41:19.196Z">
 <meta property="article:author" content="bestrookie">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="SpringBoot">
@@ -32,7 +32,7 @@
     <link rel="alternative" href="/atom.xml" title="bestrookie的折腾之路" type="application/atom+xml">
   
   
-    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/img/01.jpg">
   
   
     <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png">
@@ -53,6 +53,22 @@
  	  <script src="/lib/clickLove.js"></script>
   
   
+
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+
+</script>
+
 
 
   
@@ -263,7 +279,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">3.1k字</span>
+      <span class="post-count">3.8k字</span>
     </span>
   </span>
 
@@ -272,7 +288,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">11分</span>
+      <span class="post-count">14分</span>
     </span>
   </span>
 </div>
@@ -505,6 +521,26 @@
 </ul>
 <p>优先级由高到低，高优先级的配置会覆盖低优先级的配置</p>
 <p>springboot会从这四个位置加载主配置文件。</p>
+<h2 id="自动配置原理"><a href="#自动配置原理" class="headerlink" title="自动配置原理"></a>自动配置原理</h2><p>我们以<strong>8HttpEncodingAutoConfiguration（Http编码自动配置）</strong>为例解释自动配置原理；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//表示这是一个配置类，和以前编写的配置文件一样，也可以给容器中添加组件；</span></span><br><span class="line"><span class="meta">@Configuration</span> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">//启动指定类的ConfigurationProperties功能；</span></span><br><span class="line">  <span class="comment">//进入这个HttpProperties查看，将配置文件中对应的值和HttpProperties绑定起来；</span></span><br><span class="line">  <span class="comment">//并把HttpProperties加入到ioc容器中</span></span><br><span class="line"><span class="meta">@EnableConfigurationProperties</span>(&#123;HttpProperties<span class="class">.<span class="keyword">class</span>&#125;) </span></span><br><span class="line"><span class="class"> </span></span><br><span class="line"><span class="class"> </span></span><br><span class="line"><span class="class">//<span class="title">Spring</span>底层@<span class="title">Conditional</span>注解</span></span><br><span class="line"><span class="class">  //根据不同的条件判断，如果满足指定的条件，整个配置类里面的配置就会生效；</span></span><br><span class="line"><span class="class">  //这里的意思就是判断当前应用是否是<span class="title">web</span>应用，如果是，当前配置类生效</span></span><br><span class="line"><span class="class">@<span class="title">ConditionalOnWebApplication</span>(</span></span><br><span class="line"><span class="class">    <span class="title">type</span> </span>= Type.SERVLET</span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">//判断当前项目有没有这个类CharacterEncodingFilter；SpringMVC中进行乱码解决的过滤器；</span></span><br><span class="line"><span class="meta">@ConditionalOnClass</span>(&#123;CharacterEncodingFilter<span class="class">.<span class="keyword">class</span>&#125;)</span></span><br><span class="line"><span class="class"> </span></span><br><span class="line"><span class="class"> </span></span><br><span class="line"><span class="class">//判断配置文件中是否存在某个配置：<span class="title">spring</span>.<span class="title">http</span>.<span class="title">encoding</span>.<span class="title">enabled</span>；</span></span><br><span class="line"><span class="class">  //如果不存在，判断也是成立的</span></span><br><span class="line"><span class="class">  //即使我们配置文件中不配置<span class="title">pring</span>.<span class="title">http</span>.<span class="title">encoding</span>.<span class="title">enabled</span></span>=<span class="keyword">true</span>，也是默认生效的；</span><br><span class="line"><span class="meta">@ConditionalOnProperty</span>(</span><br><span class="line">    prefix = <span class="string">"spring.http.encoding"</span>,</span><br><span class="line">    value = &#123;<span class="string">"enabled"</span>&#125;,</span><br><span class="line">    matchIfMissing = <span class="keyword">true</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HttpEncodingAutoConfiguration</span> </span>&#123;</span><br><span class="line">    <span class="comment">//他已经和SpringBoot的配置文件映射了</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Encoding properties;</span><br><span class="line">    <span class="comment">//只有一个有参构造器的情况下，参数的值就会从容器中拿</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">HttpEncodingAutoConfiguration</span><span class="params">(HttpProperties properties)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.properties = properties.getEncoding();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//给容器中添加一个组件，这个组件的某些值需要从properties中获取</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@ConditionalOnMissingBean</span> <span class="comment">//判断容器没有这个组件？</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CharacterEncodingFilter <span class="title">characterEncodingFilter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        CharacterEncodingFilter filter = <span class="keyword">new</span> OrderedCharacterEncodingFilter();</span><br><span class="line">        filter.setEncoding(<span class="keyword">this</span>.properties.getCharset().name());</span><br><span class="line">        filter.setForceRequestEncoding(<span class="keyword">this</span>.properties.shouldForce(org.springframework.boot.autoconfigure.http.HttpProperties.Encoding.Type.REQUEST));</span><br><span class="line">        filter.setForceResponseEncoding(<span class="keyword">this</span>.properties.shouldForce(org.springframework.boot.autoconfigure.http.HttpProperties.Encoding.Type.RESPONSE));</span><br><span class="line">        <span class="keyword">return</span> filter;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//。。。。。。。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>一句话总结：根据当前不同的条件判断，决定这个配置类是否生效</strong></p>
+<ul>
+<li>一旦这个配置类生效，这个配置类就会给容器添加各种组件</li>
+<li>这些组件的属性是从对应的properties类中获取的，这些类里面的每一个属性又是和配置文件绑定的</li>
+<li>所有在配置文件中能配置的属性都是在xxxproperties类中封装着</li>
+<li>配置文件能配置什么就可以参照某个功能对应的这个属性类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//从配置文件中获取指定的值和bean的属性进行绑定</span></span><br><span class="line"><span class="meta">@ConfigurationProperties</span>(prefix = <span class="string">"spring.http"</span>) </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HttpProperties</span> </span>&#123;</span><br><span class="line">    <span class="comment">// .....</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li>Springboot启动会加载大量的自动配置类</li>
+<li>我们看我们需要的功能在Springboot默认写好的自动配置类当中</li>
+<li>我们再来看这个自动配置类中到底配置了哪些组件（只要我们要用的组件存在其中，我们就不需要再手动配置了）</li>
+<li>给容器中自动配置类添加组件的时候，会从properties类中获取某些属性。我们只需要在配置文件中指定这些属性的值即可</li>
+</ol>
+<p><strong>xxxxAutoConfigurartion：自动配置类</strong>给容器中添加组件</p>
+<p><strong>xxxxProperties:封装配置文件中相关属性</strong></p>
 
     
 
@@ -679,6 +715,19 @@
         </div>
         
         
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringBoot简介"><span class="toc-number">1.</span> <span class="toc-text">SpringBoot简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring是如何简化java开发的"><span class="toc-number">1.1.</span> <span class="toc-text">Spring是如何简化java开发的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SpringBootd的主要优点"><span class="toc-number">1.2.</span> <span class="toc-text">SpringBootd的主要优点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#springboot原理（一丢丢）"><span class="toc-number">2.</span> <span class="toc-text">springboot原理（一丢丢）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#自动配置"><span class="toc-number">2.1.</span> <span class="toc-text">自动配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#pom-xml"><span class="toc-number">2.1.1.</span> <span class="toc-text">pom.xml</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#启动器"><span class="toc-number">2.1.2.</span> <span class="toc-text">启动器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SpringApplication"><span class="toc-number">2.1.3.</span> <span class="toc-text">SpringApplication</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#run方法流程分析"><span class="toc-number">2.1.4.</span> <span class="toc-text">run方法流程分析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringBoot中常用的注解"><span class="toc-number">3.</span> <span class="toc-text">SpringBoot中常用的注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#yaml语法"><span class="toc-number">4.</span> <span class="toc-text">yaml语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#配置文件"><span class="toc-number">4.1.</span> <span class="toc-text">配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yaml概述"><span class="toc-number">4.2.</span> <span class="toc-text">yaml概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yaml基础语法"><span class="toc-number">4.3.</span> <span class="toc-text">yaml基础语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yaml注入配置文件"><span class="toc-number">4.4.</span> <span class="toc-text">yaml注入配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置文件占位符"><span class="toc-number">4.5.</span> <span class="toc-text">配置文件占位符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对比小结"><span class="toc-number">4.6.</span> <span class="toc-text">对比小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSR303数据校验及多环境切换"><span class="toc-number">5.</span> <span class="toc-text">JSR303数据校验及多环境切换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何使用"><span class="toc-number">5.1.</span> <span class="toc-text">如何使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见参数"><span class="toc-number">5.2.</span> <span class="toc-text">常见参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多环境切换"><span class="toc-number">5.3.</span> <span class="toc-text">多环境切换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yaml的多文档块"><span class="toc-number">5.4.</span> <span class="toc-text">yaml的多文档块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置文件加载位置"><span class="toc-number">5.5.</span> <span class="toc-text">配置文件加载位置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自动配置原理"><span class="toc-number">6.</span> <span class="toc-text">自动配置原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">6.1.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
     </div>
 </aside>
 
@@ -845,11 +894,15 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -858,10 +911,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Swagger</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -958,6 +1007,15 @@
                   <i class="icon-link icon"></i>
                 
                 CSDN
+              </a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://easyremember.cn" target="_blank" class="search-title" >
+                
+                  <img src="https://cdn.jsdelivr.net/gh/fengjing95/cdn@1.2/img/custom/avatar.jpg">
+                
+                前端小枫
               </a>
             </li>
           
