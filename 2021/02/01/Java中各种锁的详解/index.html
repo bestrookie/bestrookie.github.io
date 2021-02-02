@@ -20,11 +20,13 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/v2-ddb71ab0b68d65ae70244bfdeb0d6704_r.png">
 <meta property="og:image" content="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/v2-ffbe0e21512c64a1b444cf55d4b3bf61_r.png">
+<meta property="og:image" content="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/v2-5ec6ed066c75e59c4f3829ca51db8148_r.png">
 <meta property="article:published_time" content="2021-02-01T12:01:46.000Z">
-<meta property="article:modified_time" content="2021-02-02T06:42:21.483Z">
+<meta property="article:modified_time" content="2021-02-02T13:10:52.967Z">
 <meta property="article:author" content="bestrookie">
+<meta property="article:tag" content="多线程">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="多线程，锁">
+<meta property="article:tag" content="锁">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/v2-ddb71ab0b68d65ae70244bfdeb0d6704_r.png">
   
@@ -278,7 +280,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">2.7k字</span>
+      <span class="post-count">3.5k字</span>
     </span>
   </span>
 
@@ -287,7 +289,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">9分</span>
+      <span class="post-count">12分</span>
     </span>
   </span>
 </div>
@@ -340,7 +342,21 @@
 <h2 id="7、公平锁、非公平锁"><a href="#7、公平锁、非公平锁" class="headerlink" title="7、公平锁、非公平锁"></a>7、公平锁、非公平锁</h2><p>如果多个线程申请一把<strong>公平锁</strong>，那么当锁释放的时候，先申请的先得到，非常公平。显然如果是<strong>非公平锁</strong>，后申请的线程可能先获取到锁，是随机或者按照其他优先级排序的。</p>
 <p>对Reentrant类而言，通过构造函数<strong>可以指定该锁是否是公平锁，默认是非公平锁</strong>。一般情况下，非公平锁的吞吐量比公平锁大，如果没有特殊要求，优先使用非公平锁。</p>
 <p>对于synchronized而言，它也是一种<strong>非公平锁</strong>，但是没有任何办法使其变为公平锁。</p>
-<h2 id="8、可中断锁"><a href="#8、可中断锁" class="headerlink" title="8、可中断锁"></a>8、可中断锁</h2>
+<h2 id="8、可中断锁"><a href="#8、可中断锁" class="headerlink" title="8、可中断锁"></a>8、可中断锁</h2><p>可中断锁，字面意思是“可以<strong>响应中断</strong>的锁”。</p>
+<p>这里的关键是理解什么是<strong>中断</strong>。Java并没有提供任何直接中断某线程的方法，只是提供了<strong>中断机制</strong>。何谓“中断机制”？线程A向线程B发出“请你停止运行”的请求（线程B也可以给自己发送此请求），但线程B并不会立刻停止运行，而是自行选择合适的时机以自己的方式响应中断，也可以直接忽略此中断。也就是说，Java的<strong>中断不能直接终止线程</strong>，而是需要被中断的线程自己决定怎么处理。这好比是父母叮嘱在外的子女要注意身体，但子女是否注意身体，怎么注意身体则完全取决于自己。</p>
+<p>如果线程A持有锁，线程B等待获取该锁。由于线程A持有锁的时间过长，线程B不想继续等待了，我们可以让线程B中断自己或者在别的线程里中断它，这种就是<strong>可中断锁</strong>。</p>
+<p>在Java中，synchronized就是<strong>不可中断锁</strong>，而Lock的实现类都是<strong>可中断锁</strong>，可以简单看下Lock接口。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Lock接口 */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Lock</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">lock</span><span class="params">()</span></span>; <span class="comment">// 拿不到锁就一直等，拿到马上返回。</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">lockInterruptibly</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException</span>; <span class="comment">// 拿不到锁就一直等，如果等待时收到中断请求，则需要处理InterruptedException。</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">tryLock</span><span class="params">()</span></span>; <span class="comment">// 无论拿不拿得到锁，都马上返回。拿到返回true，拿不到返回false。</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">tryLock</span><span class="params">(<span class="keyword">long</span> time, TimeUnit unit)</span> <span class="keyword">throws</span> InterruptedException</span>; <span class="comment">// 同上，可以自定义等待的时间。</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">unlock</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">Condition <span class="title">newCondition</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="9、读写锁、共享锁、互斥锁"><a href="#9、读写锁、共享锁、互斥锁" class="headerlink" title="9、读写锁、共享锁、互斥锁"></a>9、读写锁、共享锁、互斥锁</h2><p>读写锁其实是一对锁，一个读锁（共享锁），一个写锁（互斥锁、排他锁）。</p>
+<p>看下Java里的ReadWriteLock接口，它只规定了两个方法，一个返回读锁，一个返回写锁。</p>
+<p><img src="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/v2-5ec6ed066c75e59c4f3829ca51db8148_r.png" alt="v2-5ec6ed066c75e59c4f3829ca51db8148_r"></p>
+<p>记得之前的乐观锁策略吗？所有线程随时都可以读，仅在写之前判断值有没有被更改。</p>
+<p>读写锁其实做的事情是一样的，只是策略稍有不同。很多情况下，线程知道自己读取数据后，是否是为了更新它。那么何不在加锁的时候直接明确这一点呢？如果我读取值是为了更新它（SQL的for update就是这个意思），那么加锁的时候就直接加<strong>写锁</strong>，我持有写锁的时候别的线程无论读还是写都需要等待；如果我读取数据仅为了前端展示，那么加锁时就明确地加一个<strong>读锁</strong>，其他线程如果也要加读锁，不需要等待，可以直接获取（读锁计数器+1）。</p>
+<p>虽然读写锁感觉与乐观锁有点像，但是<strong>读写锁是悲观锁策略</strong>。因为读写锁并没有在<strong>更新前</strong>判断值有没有被修改过，而是在<strong>加锁前</strong>决定应该用读锁还是写锁。乐观锁特指无锁编程。</p>
+<p>JDK提供的唯一一个ReadWriteLock接口实现类是ReentrantReadWriteLock。看名字就知道，它不仅提供了 读写锁，而且都是可重入锁。除了两个接口方法以外，ReentrantReadWriteLock还提供了一些便于外界监控其内部工作状态的方法，这里就不一一展开了。</p>
+<p><a href="https://zhuanlan.zhihu.com/p/71156910" target="_blank" rel="noopener">本文参考知乎大佬</a></p>
+
     
 
     
@@ -408,11 +424,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">多线程，锁</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">锁</a>
         		</li>
       		
 		</ul>
@@ -512,7 +532,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java中多种锁的实现详解"><span class="toc-number">1.</span> <span class="toc-text">Java中多种锁的实现详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、synchronized和Lock"><span class="toc-number">1.1.</span> <span class="toc-text">1、synchronized和Lock</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、悲观锁与乐观锁"><span class="toc-number">1.2.</span> <span class="toc-text">2、悲观锁与乐观锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、乐观锁的基础——CAS"><span class="toc-number">1.3.</span> <span class="toc-text">3、乐观锁的基础——CAS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、自旋锁"><span class="toc-number">1.4.</span> <span class="toc-text">4、自旋锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、synchronized锁升级：偏向锁→轻量级锁→重量级锁"><span class="toc-number">1.5.</span> <span class="toc-text">5、synchronized锁升级：偏向锁→轻量级锁→重量级锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、可重入锁（递归锁）"><span class="toc-number">1.6.</span> <span class="toc-text">6、可重入锁（递归锁）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7、公平锁、非公平锁"><span class="toc-number">1.7.</span> <span class="toc-text">7、公平锁、非公平锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8、可中断锁"><span class="toc-number">1.8.</span> <span class="toc-text">8、可中断锁</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java中多种锁的实现详解"><span class="toc-number">1.</span> <span class="toc-text">Java中多种锁的实现详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、synchronized和Lock"><span class="toc-number">1.1.</span> <span class="toc-text">1、synchronized和Lock</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、悲观锁与乐观锁"><span class="toc-number">1.2.</span> <span class="toc-text">2、悲观锁与乐观锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、乐观锁的基础——CAS"><span class="toc-number">1.3.</span> <span class="toc-text">3、乐观锁的基础——CAS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、自旋锁"><span class="toc-number">1.4.</span> <span class="toc-text">4、自旋锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、synchronized锁升级：偏向锁→轻量级锁→重量级锁"><span class="toc-number">1.5.</span> <span class="toc-text">5、synchronized锁升级：偏向锁→轻量级锁→重量级锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、可重入锁（递归锁）"><span class="toc-number">1.6.</span> <span class="toc-text">6、可重入锁（递归锁）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7、公平锁、非公平锁"><span class="toc-number">1.7.</span> <span class="toc-text">7、公平锁、非公平锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8、可中断锁"><span class="toc-number">1.8.</span> <span class="toc-text">8、可中断锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9、读写锁、共享锁、互斥锁"><span class="toc-number">1.9.</span> <span class="toc-text">9、读写锁、共享锁、互斥锁</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -684,11 +704,7 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -696,11 +712,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">多线程，锁</a>
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">锁</a>
               </li>
              
               <li class="article-tag-list-item">
