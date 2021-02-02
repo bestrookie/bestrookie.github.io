@@ -250,6 +250,397 @@
 
 
   
+    <article id="post-Java中各种锁的详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/02/01/Java%E4%B8%AD%E5%90%84%E7%A7%8D%E9%94%81%E7%9A%84%E8%AF%A6%E8%A7%A3/" target="_blank">Java中各种锁的详解</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/02/01/Java%E4%B8%AD%E5%90%84%E7%A7%8D%E9%94%81%E7%9A%84%E8%AF%A6%E8%A7%A3/" class="archive-article-date">
+        <time datetime="2021-02-01T12:01:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-01</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="Java中多种锁的实现详解"><a href="#Java中多种锁的实现详解" class="headerlink" title="Java中多种锁的实现详解"></a>Java中多种锁的实现详解</h1><h2 id="1、synchronized和Lock"><a href="#1、synchronized和Lock" class="headerlink" title="1、synchronized和Lock"></a>1、synchronized和Lock</h2><p>java中有两种锁的加锁方式：一种是用于synchronized关键字，另一种是用Lock接口实现类</p>
+<p>形象地说，synchronized关键字是自动挡，可以满足一切日常驾驶需求。但是如果你想要玩其他的骚操作，就需要手动挡—各种Lock实现类</p>
+<p>所以如果你只是想要简单的加个锁，对性能也没有什么特别的要求，用synchronized关键字就足够了。自从Java 5 之后，才在<strong>java.util.concurrent.locks</strong>包下有了另一种方式来实现锁那就是Lock。也就是说，<strong>synchronized是Java语言内置的关键字，而Lock是一个接口</strong>，这个接口的实现类在代码层面实现了锁的功能，具体实现有兴趣可以自己研究一下哦。</p>
+    
+    <a class="article-more-a" href="/2021/02/01/Java%E4%B8%AD%E5%90%84%E7%A7%8D%E9%94%81%E7%9A%84%E8%AF%A6%E8%A7%A3/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">多线程，锁</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/02/01/Java%E4%B8%AD%E5%90%84%E7%A7%8D%E9%94%81%E7%9A%84%E8%AF%A6%E8%A7%A3/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-JUC并发编程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/01/26/JUC%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" target="_blank">JUC并发编程</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/01/26/JUC%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" class="archive-article-date">
+        <time datetime="2021-01-26T11:33:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-26</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="1、线程和进程"><a href="#1、线程和进程" class="headerlink" title="1、线程和进程"></a>1、线程和进程</h2><p>进程：程序的集合。一个进程往往可以包含多个线程，至少包含一个</p>
+<p>java默认有两个线程：一个main线程，一个gc线程</p>
+<p>线程：线程是cpu调度和执行的单位，对于java而言：Thread、Runnable、Callable</p>
+    
+    <a class="article-more-a" href="/2021/01/26/JUC%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/01/26/JUC%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-多线程详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/01/17/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/" target="_blank">多线程详解</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/01/17/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/" class="archive-article-date">
+        <time datetime="2021-01-17T02:01:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-17</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="Process与Thread"><a href="#Process与Thread" class="headerlink" title="Process与Thread"></a>Process与Thread</h2><ul>
+<li><p>程序是指令和数据的有序集合，其本身没有任何运行的含义，是一个静态的概念</p>
+</li>
+<li><p>而进程则是程序的一次执行过程，它是一个动态的概念。是系统资源分配的单位</p>
+</li>
+<li><p>通常在一个进程中可以包含若干个<strong>线程</strong>，当然一个进程中至少有一个线程，不然没有存在的意义。线程是cpu调度和执行的单位。</p>
+<p>注意：很多线程是模拟出来的，真正的多线程是指有多个cpu，即多核，如服务器。如果是模拟出来的多线程，即在一个cpu的情况下，在同一个时间点，cpu只能执行一个代码，因为切换的很快，所以就有同时执行的错觉。</p>
+    
+    <a class="article-more-a" href="/2021/01/17/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/01/17/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%AF%A6%E8%A7%A3/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-网络编程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/01/14/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" target="_blank">网络编程</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/01/14/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="archive-article-date">
+        <time datetime="2021-01-14T09:55:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-14</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h2><p>ip地址：InetAddress（java类）</p>
+<ul>
+<li>唯一定位一台网络上计算机</li>
+<li>127.0.0.1：本机localhost</li>
+<li>IP地址的分类<ul>
+<li>ipv4、ipv6 <ul>
+<li>IPV4 127.0.0.1，4个字节组成。0~255，42亿；30亿在北美。4亿在亚洲。2011年用尽</li>
+<li>IPV6 128位，8个无符号整数</li>
+</ul>
+</li>
+<li>公网（互联网）-私网（局域网）<ul>
+<li>ABCD类地址</li>
+<li>192.168.xx.xx，专门给组织内部使用</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+    
+    <a class="article-more-a" href="/2021/01/14/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/01/14/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-异步、邮件、定时任务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -817,373 +1208,9 @@
 
 
   
-    <article id="post-Swagger学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/08/12/Swagger%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_blank">Spring集成Swagger</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/08/12/Swagger%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-        <time datetime="2020-08-12T14:03:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-12</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="SpringBoot集成Swagger（idea）"><a href="#SpringBoot集成Swagger（idea）" class="headerlink" title="SpringBoot集成Swagger（idea）"></a>SpringBoot集成Swagger（idea）</h1><p><strong>本次使用的是Swagger2.9如果使用Seagger3不适用本次学习</strong></p>
-    
-    <a class="article-more-a" href="/2020/08/12/Swagger%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Swagger</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/08/12/Swagger%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Mysql开发岗面试中常问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/08/06/Mysql%E5%BC%80%E5%8F%91%E5%B2%97%E9%9D%A2%E8%AF%95%E4%B8%AD%E5%B8%B8%E9%97%AE%E9%A2%98/" target="_blank">Mysql开发岗面试中常问题</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/08/06/Mysql%E5%BC%80%E5%8F%91%E5%B2%97%E9%9D%A2%E8%AF%95%E4%B8%AD%E5%B8%B8%E9%97%AE%E9%A2%98/" class="archive-article-date">
-        <time datetime="2020-08-06T14:53:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-06</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="Mysql常问问题"><a href="#Mysql常问问题" class="headerlink" title="Mysql常问问题"></a>Mysql常问问题</h1>
-    
-    <a class="article-more-a" href="/2020/08/06/Mysql%E5%BC%80%E5%8F%91%E5%B2%97%E9%9D%A2%E8%AF%95%E4%B8%AD%E5%B8%B8%E9%97%AE%E9%A2%98/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Mysql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/08/06/Mysql%E5%BC%80%E5%8F%91%E5%B2%97%E9%9D%A2%E8%AF%95%E4%B8%AD%E5%B8%B8%E9%97%AE%E9%A2%98/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-SpringBoot学习（idea）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/08/05/SpringBoot%E5%AD%A6%E4%B9%A0%EF%BC%88idea%EF%BC%89/" target="_blank">SpringBoot学习（idea）</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/08/05/SpringBoot%E5%AD%A6%E4%B9%A0%EF%BC%88idea%EF%BC%89/" class="archive-article-date">
-        <time datetime="2020-08-05T14:40:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="SpringBoot简介"><a href="#SpringBoot简介" class="headerlink" title="SpringBoot简介"></a>SpringBoot简介</h2><p><strong>核心：</strong>约定大于配置</p>
-    
-    <a class="article-more-a" href="/2020/08/05/SpringBoot%E5%AD%A6%E4%B9%A0%EF%BC%88idea%EF%BC%89/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/08/05/SpringBoot%E5%AD%A6%E4%B9%A0%EF%BC%88idea%EF%BC%89/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-java注解和反射" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/07/27/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/" target="_blank">java注解和反射</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/07/27/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/" class="archive-article-date">
-        <time datetime="2020-07-27T13:47:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-27</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="什么是注解（Annotation）"><a href="#什么是注解（Annotation）" class="headerlink" title="什么是注解（Annotation）"></a>什么是注解（Annotation）</h2><p>Annotation是从<strong>jkd5.0</strong>开始引用的新技术</p>
-    
-    <a class="article-more-a" href="/2020/07/27/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/07/27/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next »</a>
     </nav>
   
 
@@ -1195,7 +1222,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019-2020 <a href="http://yoursite.com/" target="_blank">bestrookie</a>
+    		&copy; 2020-2021 <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">鲁ICP备2021003911号</a>
     	</div>
       	<div class="footer-right">
 			
@@ -1314,15 +1341,23 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">多线程，锁</a>
               </li>
              
               <li class="article-tag-list-item">
