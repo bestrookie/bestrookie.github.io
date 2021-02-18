@@ -7,17 +7,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: java | bestrookie的折腾之路</title>
+  <title>java类加载机制 | bestrookie的折腾之路</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta property="og:type" content="website">
-<meta property="og:title" content="bestrookie的折腾之路">
-<meta property="og:url" content="http://yoursite.com/tags/java/page/2/index.html">
+  <meta name="description" content="java的类加载机制当程序主动使用某个类时，如果该类还未被加载到内存中，则JVM或通过加载、链接、初始化3个步骤来对该类进行初始化。如果没有意外，JVM将会连续完成3个步骤，所以有时也把这3个步骤统称为类加载或类初始化。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java类加载机制">
+<meta property="og:url" content="http://yoursite.com/2021/02/18/java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/index.html">
 <meta property="og:site_name" content="bestrookie的折腾之路">
+<meta property="og:description" content="java的类加载机制当程序主动使用某个类时，如果该类还未被加载到内存中，则JVM或通过加载、链接、初始化3个步骤来对该类进行初始化。如果没有意外，JVM将会连续完成3个步骤，所以有时也把这3个步骤统称为类加载或类初始化。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/%E6%9C%AA%E5%91%BD%E5%90%8D%E6%96%87%E4%BB%B6.png">
+<meta property="og:image" content="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20210218221051315.png">
+<meta property="article:published_time" content="2021-02-18T01:53:07.000Z">
+<meta property="article:modified_time" content="2021-02-18T14:23:07.093Z">
 <meta property="article:author" content="bestrookie">
+<meta property="article:tag" content="JVM">
+<meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/%E6%9C%AA%E5%91%BD%E5%90%8D%E6%96%87%E4%BB%B6.png">
   
     <link rel="alternative" href="/atom.xml" title="bestrookie的折腾之路" type="application/atom+xml">
   
@@ -236,202 +245,329 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-java类加载机制" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/08/05/SpringBoot%E5%AD%A6%E4%B9%A0%EF%BC%88idea%EF%BC%89/" class="archive-article-date">
-        <time datetime="2020-08-05T14:40:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
-</a>
-
-        </div>
-    	 
+      <header class="article-header">
   
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/08/05/SpringBoot%E5%AD%A6%E4%B9%A0%EF%BC%88idea%EF%BC%89/" target="_blank">SpringBoot学习（idea）</a>
   
+    <h1 class="article-title" itemprop="name">
+      java类加载机制
     </h1>
   
 
 
-        <div class="article-info info-on-right">
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2021/02/18/java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/" class="archive-article-date">
+        <time datetime="2021-02-18T01:53:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-18</time>
+</a>
+
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">3.1k字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">10分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="java的类加载机制"><a href="#java的类加载机制" class="headerlink" title="java的类加载机制"></a>java的类加载机制</h1><p>当程序主动使用某个类时，如果该类还未被加载到内存中，则JVM或通过加载、链接、初始化3个步骤来对该类进行初始化。如果没有意外，JVM将会连续完成3个步骤，所以有时也把这3个步骤统称为类加载或类初始化。</p>
+<a id="more"></a>
+
+<p><img src="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/%E6%9C%AA%E5%91%BD%E5%90%8D%E6%96%87%E4%BB%B6.png" alt="未命名文件"></p>
+<h2 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a>类加载过程</h2><h3 id="1-加载"><a href="#1-加载" class="headerlink" title="1.加载"></a>1.加载</h3><p>加载指的是将类的clas文件读到内存，并为之创建一个java.lang.Class对象，也就是说，当程序中使用任何类时，系统都会为之创建一个java.lang.Class对象。</p>
+<p>类的加载由类加载器完成，类加载器通常由JVM提供，这些类加载器也是前面所有程序运行的基础，JVM提供的类加载器通常被称为系统类加载器。除此之外，开发者可以通过继承ClassLoader基类来创建自己的类加载器。</p>
+<p>通过使用不同的类加载器，可以从不同来源加载类的二进制数据，通常有如下几种方式</p>
+<ul>
+<li>从本地文件系统加载class文件，这是前面绝大部分实例程序的类加载方式。</li>
+<li>从JAR包加载class文件，这种方式也是很常见的，JDBC编程时用到的数据库驱动类就放在JAR文件中。</li>
+<li>通过网络加载class文件。</li>
+<li>把一个Java源文件动态编译，并执行加载。</li>
+</ul>
+<p>类加载器通常无须等到“首次使用”该类才加载该类，Java虚拟机规范允许系统预先加载某些类。</p>
+<h3 id="2-链接"><a href="#2-链接" class="headerlink" title="2.链接"></a>2.链接</h3><p>当类被加载之后，系统为之生成一个对应的Class对象，接着将会进入链接阶段，链接阶段负责把类的二进制数据合并到JRE中。类链接又分为如下3个阶段。</p>
+<ul>
+<li><strong>验证：</strong>验证阶段用于检验被加载的类是否有正确的内部结构，并和其他类协调一致。Java是相对C++语言是安全的语言，例如C++不具有的数组越界的检查。这本身就是对自身安全的一种保护。验证阶段是Java非常重要的一个阶段，它会直接的保证应用是否会被恶意入侵的一道重要的防线，越是严谨的验证机制越安全。验证的目的在于确保Class文件的字节流中包含信息符合当前虚拟机要求，不会危害虚拟机自身安全。其主要包括四种验证，文件格式验证，元数据验证，字节码验证，符号引用验证。<ul>
+<li><strong>文件格式验证：</strong>主要验证字节流是否符合Class文件格式规范，并且能被当前的虚拟机加载处理。例如：主，次版本号是否在当前虚拟机处理的范围之内。常量池中是否有不被支持的常量类型。指向常量中的索引值是否存在不存在的常量或者不符合类型的常量。</li>
+<li><strong>元数据验证：</strong>对字节码描述的信息进行语义的分析，分析是否符合java的语言语法的规范。</li>
+<li><strong>字节码验证：</strong>最重要的验证环节，分析数据流和控制，确定语义是合法的，符合逻辑的。主要支队元数据验证后对方法体的验证。保证类方法在运行时不会有危害出现。</li>
+<li><strong>符号引用验证：</strong>主要是针对符号引用转换为直接引用的时候，是会延伸到第三解析阶段，主要去确定访问类型等涉及到引用的情况，主要是要保证引用一定会被访问到，不会出现类无法访问等问题。</li>
+</ul>
+</li>
+<li><strong>准备：</strong>类准备阶段负责为类的静态变量分配内存，并设置默认初始值。</li>
+<li><strong>解析：</strong>将类的二进制数据中的符号引用替换成直接引用。说明一下：符号引用：符号引用是以一组符号来描述引用的目标，符号可以使任何的字面形式的字面量，只要不会出现冲突，能够定位到就行。布局和内存无关。直接饮用：是指向目标的指针，偏移量或者能够直接定位的句柄。该引用是和内存中的布局有关的，并且一定加载进来的。</li>
+</ul>
+<h3 id="3-初始化"><a href="#3-初始化" class="headerlink" title="3.初始化"></a>3.初始化</h3><p>初始化是为类的静态变量赋予正确的初始值，准备阶段和初始化阶段看似有点矛盾，其实不然，如果类中有语句：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">privae <span class="keyword">static</span> <span class="keyword">int</span> a = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<p>它的执行阶段是这样的：首先字节码文件被加载到内存后，先进行链接的验证这一步骤，验证通过后准备阶段，先给a分配内存，因为变量a是static的，所以此时a等于int类型的默认初始值0，即a = 0，然后到解析，到初始化这一步骤时，才把a的真正的值10赋给a，此时a = 10。</p>
+<h2 id="类加载时机"><a href="#类加载时机" class="headerlink" title="类加载时机"></a>类加载时机</h2><ul>
+<li>创建类的实例，也就是new一个对象</li>
+<li>访问某个类或者接口的静态变量，或者对该静态变量赋值</li>
+<li>调用类的静态方法</li>
+<li>反射</li>
+<li>初始化一个类的子类（会首先初始化子类的父类）</li>
+<li>JVM启动时表明的启动类，即文件名和类名相同的那个类</li>
+</ul>
+<p><strong>除此之外，下面几种情形需要特别指出：</strong></p>
+<p>对于一个final类型的静态变量，如果该变量的值在编译时就可以确定下来，那么这个变量相当于“宏变量”。Java编译器会在编译时直接把这个变量出现的地方替换成它的值，因此即使程序使用该静态变量，也不会导致该类的初始化。反之，如果final类型的静态Field的值不能在编译的时候确定下来，则必须等到运行时才可以确定该变量的值，如果通过该类来访问它的静态变量，则会导致该类被初始化。</p>
+<h2 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h2><p>类加载器负责加载所有的类，其为所有的被载入内存的类生成一个java.lang.Class实例对象。一旦一个类被加载入JVM中，同一个类就不会被再次载入了。正如一个对象有一个标识一样，一个载入JVM的类也有一个唯一的标识。在java中，一个类用其全限定类名（包括包名和类名）作为标识；但在JVM中，一个类用其全限定类名和其类加载器作为唯一标识。例如：如果在pg的包中有一个名为Preson的类，被类加载器ClassLoader的实例kl负责加载，则该Preson类对应的Class对象在JVM中表示（Preson.pg.kl）。这意味着两个类加载器加载的同类名是不同的、它们所加载的类也不是完全不同、互不兼容的。</p>
+<p>JVM预定义有三种类加载器，当一个JVM启动的时候，Java开始使用如下三种类加载器：</p>
+<ul>
+<li><strong>根类加载器（bootstrap class loader）：</strong>它们用来加载Java的核心类，使用原生代码来实现的，并不继承自java.lang.ClassLoader。由于引导类加载器涉及到虚拟机本地实现细节，开发者无法直接获取到启动类加载器的引用，所以不允许直接通过引用进行操作。</li>
+<li><strong>扩展类加载器（extensions class loader）：</strong>它负责加载JRE的扩展目录，lib/ext或者由java.ext.dirs系统属性指定的目录中的JAR包的类。由Java语言实现，父类加载器为null。</li>
+<li><strong>系统类加载器（system class loader）：</strong>被称为系统（也称为应用）类加载器，它负责在JVM启动时加载来自Java命令的-classpath选项、java.class.path系统属性，或者CLASSPATH换将变量所指定的JAR包和类路径。系统通过ClassLoader的静态方法getSystemClassLoader()来获取系统类加载器。如果没有特别指定，则用户自定义的类加载器都以此类加载器作为父类加载器。由Java语言实现，父类加载器为ExtClassLoader。</li>
+</ul>
+<p>类加载器加载Class大致要经过如下8个步骤：</p>
+<ol>
+<li>检测此Class是否载入过，即在缓冲区中是否有此Class，如果有直接进入第8步，否则进入第2步。</li>
+<li>如果没有父类加载器，则要么Parent是根类加载器，要么本身就是根类加载器，则跳到第4步，如果父类加载器存在，则进入第3步。</li>
+<li>请求使用父类加载器去载入目标类，如果载入成功跳至第8步，否则执行第5步。</li>
+<li>请求使用根类加载器去载入目标类，如果载入成功跳至第8步，否则跳至第7步。</li>
+<li>当前类加载器尝试寻找Class文件，如果找到则执行第6步，如果找不到执行第7步。</li>
+<li>从文件中载入Class文件，成功后跳至第8步。</li>
+<li>抛出ClassNotFindException异常。</li>
+<li>返回对应的java.lang.Class对象。</li>
+</ol>
+<h2 id="类加载机制"><a href="#类加载机制" class="headerlink" title="类加载机制"></a>类加载机制</h2><p><strong>JVM的类加载机制</strong>主要有如下3种。</p>
+<ul>
+<li>全盘负责：所谓的全盘负责，就是当一个类加载器负责加载某个Class时，该Class所依赖和引用其他Class也将由该类加载器负责载入，除非显示使用另一个类加载器来载入。</li>
+<li>双亲委派机制：所谓的双亲委派，则是先父类加载器试图加载该Class，只有在父类加载器无法加载该类时才尝试从自己的类路径中加载该类。通俗的讲，就是某个特定的类加载器在接到加载类的请求时，首先将加载任务委托给父加载器，一次递归，如果父加载器可以完成类加载任务，就成功返回；只有父加载器无法完成此加载任务时，才自己去加载。</li>
+<li>缓存机制：缓存机制将会保存所有加载过的Class都会被缓存，当程序中需要某个Class时，类加载器先从缓存区中搜寻该Class，只有当缓存区中不存在该Calss对象时，系统才会读取该类对应的二进制数据，并将其转换成Class对象，存入缓冲区中。这就是为什么修改了Class后必须重新启动JVM，程序所做的修改才会生效的原因。</li>
+</ul>
+<p><strong>特别强调一下双亲委派机制</strong></p>
+<p><img src="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/image-20210218221051315.png" alt="image-20210218221051315"></p>
+<p>双亲委派机制，其工作原理是，如果一个类收到了类加载请求，它并不会自己先去加载，而是把这个请求委托给父类的加载器去执行，如果父类加载器还存在父类加载器，则进一步向上委托，依次递归，请求最终将到达顶层的启动类加载器，如果父类加载器可以完成类加载任务，就成功返回，倘若父类加载器无法完成此加载任务，子加载器才会尝试自己去加载，这就是双亲委派模式，即每个儿子都很懒，每次有活就丢给父亲去干，直到父亲说这件我也干不了时，儿子自己才想办法去完成。</p>
+<p>双亲委派机制的优势：采用双亲委派模式的好处是Java类随着它的类加载器一起具备了一种带有优先级的层次关系，通过这种层次关系可以避免类的重复加载，当父类已经加载了该类时，就没有必要子类再加载一次。其次是考虑到安全因素，java核心api中定义类型不会被随意替换，假设通过网络传递一个名为java.lang.Integer的类，通过双亲委派机制传递到启动类加载器，而启动类加载器在核心api发现这个名字的类，发现该类已被加载，并不会重新加载网络传递过来的，这样便可以防止核心API库被随意篡改</p>
+
+    
+
+    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/weixin.png">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
+        </div>
+      </a>
+    </div>
+    
+
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          bestrookie
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="http://yoursite.com/2021/02/18/java类加载机制/" title="java类加载机制" target="_blank">http://yoursite.com/2021/02/18/java类加载机制/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
           
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/07/27/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/" class="archive-article-date">
-        <time datetime="2020-07-27T13:47:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-27</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/07/27/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/" target="_blank">java注解和反射</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+    
 
+    
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2021/02/18/java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/07/21/Spring-boot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-        <time datetime="2020-07-21T11:00:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-21</time>
-</a>
 
+
+<nav id="article-nav">
+  
+  
+    <a href="/2021/02/08/Myql%E7%9F%A5%E8%AF%86%E5%9B%9E%E9%A1%BE/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Mysql知识回顾</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/07/21/Spring-boot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_blank">Spring boot(ecilpse)学习笔记</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#java的类加载机制"><span class="toc-number">1.</span> <span class="toc-text">java的类加载机制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#类加载过程"><span class="toc-number">1.1.</span> <span class="toc-text">类加载过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-加载"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-链接"><span class="toc-number">1.1.2.</span> <span class="toc-text">2.链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-初始化"><span class="toc-number">1.1.3.</span> <span class="toc-text">3.初始化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类加载时机"><span class="toc-number">1.2.</span> <span class="toc-text">类加载时机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类加载器"><span class="toc-number">1.3.</span> <span class="toc-text">类加载器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类加载机制"><span class="toc-number">1.4.</span> <span class="toc-text">类加载机制</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/07/14/mybatis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-        <time datetime="2020-07-14T13:16:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-14</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/07/14/mybatis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_blank">Mybatis学习笔记</a>
-  
-    </h1>
-  
+        
+    </div>
+</aside>
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/tags/java/">« Prev</a><a class="page-number" href="/tags/java/">1</a><span class="page-number current">2</span>
-    </nav>
-  
+<div id="SOHUCS" sid="java类加载机制" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "cyvjryaoC",
+        conf: "true"
+    });
+</script>
+</script>
+
+
+
+
+
+
+
+
 
 
           </div>
@@ -472,9 +608,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
