@@ -20,7 +20,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/best_rookie/picgo_cdn/raw/master/img/415611_1442458661106_F4A62FDD254F710F39378C754ED65E61.jpg">
 <meta property="article:published_time" content="2021-02-19T13:44:47.000Z">
-<meta property="article:modified_time" content="2021-02-20T14:23:01.890Z">
+<meta property="article:modified_time" content="2021-02-21T08:17:51.212Z">
 <meta property="article:author" content="bestrookie">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
@@ -276,7 +276,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">807字</span>
+      <span class="post-count">821字</span>
     </span>
   </span>
 
@@ -392,6 +392,16 @@
 <td>boolean flag=true;</td>
 </tr>
 </tbody></table>
+<h2 id="Object类的方法"><a href="#Object类的方法" class="headerlink" title="Object类的方法"></a>Object类的方法</h2><ol>
+<li>clone()</li>
+<li>equals()</li>
+<li>finalize()</li>
+<li>getClass()</li>
+<li>hashCode()</li>
+<li>toString()</li>
+<li>wait()</li>
+<li>notify()\notifyAll()</li>
+</ol>
 
     
 
@@ -531,6 +541,15 @@
 
 <nav id="article-nav">
   
+    <a href="/2021/02/26/%E5%AF%B9%E8%B1%A1%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          对象加载过程
+        
+      </div>
+    </a>
+  
   
     <a href="/2021/02/19/java%E7%9A%84%E9%87%8D%E5%86%99%E5%92%8C%E9%87%8D%E8%BD%BD/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">java的重写和重载</div>
@@ -560,7 +579,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#自动类型转换遵循下面的规则"><span class="toc-number">1.</span> <span class="toc-text">自动类型转换遵循下面的规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet生命周期"><span class="toc-number">2.</span> <span class="toc-text">Servlet生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#抽象类和借口"><span class="toc-number">3.</span> <span class="toc-text">抽象类和借口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#抽象类"><span class="toc-number">3.1.</span> <span class="toc-text">抽象类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接口"><span class="toc-number">3.2.</span> <span class="toc-text">接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本类型的默认值和取值范围"><span class="toc-number">4.</span> <span class="toc-text">基本类型的默认值和取值范围</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#自动类型转换遵循下面的规则"><span class="toc-number">1.</span> <span class="toc-text">自动类型转换遵循下面的规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet生命周期"><span class="toc-number">2.</span> <span class="toc-text">Servlet生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#抽象类和借口"><span class="toc-number">3.</span> <span class="toc-text">抽象类和借口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#抽象类"><span class="toc-number">3.1.</span> <span class="toc-text">抽象类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接口"><span class="toc-number">3.2.</span> <span class="toc-text">接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本类型的默认值和取值范围"><span class="toc-number">4.</span> <span class="toc-text">基本类型的默认值和取值范围</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Object类的方法"><span class="toc-number">5.</span> <span class="toc-text">Object类的方法</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -718,15 +737,19 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">锁</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -735,10 +758,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -755,6 +774,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jvm</a>
               </li>
             
             <div class="clearfix"></div>
